@@ -10,5 +10,6 @@ namespace Entities.Concrete
     public class Category:IEntity
     {
         public int CategoryId { get; set; }
+        public int CategoryId2 { get; set; }
     }
 }
