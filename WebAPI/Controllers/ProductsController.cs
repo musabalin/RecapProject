@@ -1,0 +1,61 @@
+﻿using Business.Abstract;
+using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
+    {
+        IProductService _productService;
+
+        public ProductsController(IProductService productService)
+        {
+            _productService = productService;
+        }
+        [HttpGet("getall")]
+        public IActionResult GetList()
+        {
+            var result = _productService.GetAll();
+            if (result.ResultStatus == 0)
+            {
+                return Ok(result.Data);
+            }
+            else
+                return BadRequest(result.Message);
+        }
+        [HttpGet("getlistbycategory")]
+        public IActionResult GetListByCategory(int Id)
+        {
+            var result = _productService.GetByCategory(Id);
+            if (result.ResultStatus == 0)
+            {
+                return Ok(result.Data);
+            }
+            else
+                return BadRequest(result.Message);
+
+        }
+        [HttpPut("add")]
+        public IActionResult Add(Product product)
+        {
+            var result = _productService.Add(product);
+            if (result.ResultStatus == 0)
+            {
+                return Ok(result.Message);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+
+
+        }
+    }
+}

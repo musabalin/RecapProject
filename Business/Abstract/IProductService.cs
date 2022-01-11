@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        List<Product> GetByCategory(int id);
-        List<Product> GetByProductId(int id);
-        List<Product> GetAll(Product product);
-        void Add(Product product);
-        void Delete(Product product);
-        void Update(Product product);
+        IDataResult<List<Product>> GetByCategory(int id);
+        IDataResult<List<Product>> GetByProductId(int id);
+        IDataResult<List<Product>> GetAll();
+        IResult Add(Product product);
+        IResult Delete(Product product);
+        IResult Update(Product product);
 
 
 

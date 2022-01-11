@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
+using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class ProductService:IProductService
+    public class ProductService : IProductService
     {
         IProductDal _product;
 
@@ -18,34 +20,39 @@ namespace Business.Concrete
             _product = product;
         }
 
-        public void Add(Product product)
+        public IResult Add(Product product)
         {
             _product.Add(product);
+            return new Result(ResultStatus.Success);
         }
 
-        public void Delete(Product product)
+        public IResult Delete(Product product)
         {
             _product.Delete(product);
+            return new Result(ResultStatus.Success);
         }
 
-        public List<Product> GetAll(Product product)
+        public IDataResult<List<Product>> GetAll()
         {
-            return _product.GetAll();
+
+            return new DataResult<List<Product>>(ResultStatus.Success, _product.GetAll());
         }
 
-        public List<Product> GetByCategory(int id)
+        public IDataResult<List<Product>> GetByCategory(int id)
         {
-            return _product.GetAll(p => p.CategoryId == id);
+
+            return new DataResult<List<Product>>(ResultStatus.Success, _product.GetAll(p => p.CategoryId == id));
         }
 
-        public List<Product> GetByProductId(int id)
+        public IDataResult<List<Product>> GetByProductId(int id)
         {
-            return _product.GetAll(p => p.ProductId == id);
+            return new DataResult<List<Product>>(ResultStatus.Success, _product.GetAll(p => p.ProductId == id));
         }
 
-        public void Update(Product product)
+        public IResult Update(Product product)
         {
             _product.Update(product);
+            return new Result(ResultStatus.Success);
         }
     }
 }
