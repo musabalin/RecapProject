@@ -8,6 +8,7 @@ namespace Core.Utilities.Results.Concrete
 {
     public class Result : IResult
     {
+       
         public Result(ResultStatus resultStatus)
         {
             ResultStatus = resultStatus;
@@ -23,8 +24,6 @@ namespace Core.Utilities.Results.Concrete
             Message = message;
             Exception = exception;
         }
-
-
         public ResultStatus ResultStatus { get; }
         public string Message { get; }
         public Exception Exception { get; }

@@ -17,6 +17,9 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<ProductService>().As<IProductService>();
             builder.RegisterType<ProductDal>().As<IProductDal>();
+
+            builder.RegisterType<CategoryDal>().As<ICategoryDal>();
+            
         }
     }
 }
