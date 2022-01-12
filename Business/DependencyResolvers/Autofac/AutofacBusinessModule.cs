@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.DependencyResolvers.Autofac
 {
-    public class AutofacBusinessModule:Module
+    public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -19,7 +19,11 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ProductDal>().As<IProductDal>();
 
             builder.RegisterType<CategoryDal>().As<ICategoryDal>();
-            
+
+            builder.RegisterType<UserDal>().As<IUserDal>();
+            builder.RegisterType<UserService>().As<IUserService>();
+
+
         }
     }
 }
