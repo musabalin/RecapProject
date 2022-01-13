@@ -42,13 +42,14 @@ namespace WebAPI.Controllers
                 return BadRequest(result.Message);
 
         }
-        [HttpPut("add")]
+        [HttpPost("add")]
         public IActionResult Add(Product product)
         {
             var result = _productService.Add(product);
             if (result.ResultStatus == 0)
             {
-                return Ok(result.Message);
+
+                return Ok("Eklendi...");
             }
             else
             {
@@ -56,6 +57,20 @@ namespace WebAPI.Controllers
             }
 
 
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Product product)
+        {
+            var result = _productService.Update(product);
+            if (result.ResultStatus == 0)
+            {
+                return Ok(result.ResultStatus);
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
     }
 }

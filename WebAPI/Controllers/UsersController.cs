@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,32 @@ namespace WebAPI.Controllers
             if (result.ResultStatus==0)
             {
                 return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("add")]
+        public IActionResult Add(User user)
+        {
+            var result = _userService.Add(user);
+            if (result.ResultStatus==0)
+            {
+                return Ok("Eklendi..");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _userService.GetAll();
+            if (result.ResultStatus==0)
+            {
+                return Ok("Görüntülendi...");
             }
             else
             {

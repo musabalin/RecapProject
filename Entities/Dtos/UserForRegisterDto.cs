@@ -5,15 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.Dtos
 {
-    public class User:IEntity
+    public class UserForRegisterDto:IDto
     {
-        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public byte Status { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public byte[] PassworHash { get; set; }
     }
 }

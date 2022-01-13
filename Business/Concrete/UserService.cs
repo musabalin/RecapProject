@@ -1,8 +1,8 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
-using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +22,25 @@ namespace Business.Concrete
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            var result = _userDal.GetClaims(user);
-            return new DataResult<List<OperationClaim>>(ResultStatus.Success,result); 
-                
-           
+            
+            return new DataResult<List<OperationClaim>>(ResultStatus.Success,  _userDal.GetClaims(user));
+
+        }
+
+        public IResult Add(User user)
+        {
+            _userDal.Add(user);
+            return new Result(ResultStatus.Success);
+        }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            return new DataResult<List<User>>(ResultStatus.Success,_userDal.GetAll());
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new DataResult<User>(ResultStatus.Success, _userDal.Get(u => u.Email == email));
         }
     }
 }
