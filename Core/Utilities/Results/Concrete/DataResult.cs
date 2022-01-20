@@ -15,6 +15,11 @@ namespace Core.Utilities.Results.Concrete
         public string Message { get; }
 
         public Exception Exception { get; }
+
+        public DataResult(ResultStatus resultStatus)
+        {
+            ResultStatus = resultStatus;
+        }
         public DataResult(ResultStatus resultStatus, T data)
         {
             ResultStatus = resultStatus;
