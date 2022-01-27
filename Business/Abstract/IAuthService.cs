@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    interface IAuthService
+    public interface IAuthService
     {
-        IDataResult<User> Register(UserForRegisterDto userForRegisterDto,string password);
+        IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
 
 

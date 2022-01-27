@@ -20,10 +20,10 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        public List<OperationClaim> GetClaims(User user)
         {
             
-            return new DataResult<List<OperationClaim>>(ResultStatus.Success,  _userDal.GetClaims(user));
+            return new List<OperationClaim>( _userDal.GetClaims(user));
 
         }
 
@@ -38,9 +38,9 @@ namespace Business.Concrete
             return new DataResult<List<User>>(ResultStatus.Success,_userDal.GetAll());
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return new DataResult<User>(ResultStatus.Success, _userDal.Get(u => u.Email == email));
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }

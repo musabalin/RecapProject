@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Security.Encryption
 {
-    class SecurityKeyHelper
+    public class SecurityKeyHelper
     {
         public static SecurityKey CretateSecurityKey(string securityKey)
         {
