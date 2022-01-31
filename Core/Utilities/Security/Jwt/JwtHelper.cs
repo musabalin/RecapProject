@@ -22,12 +22,14 @@ namespace Core.Utilities.Security.Jwt
         {
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpration);
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
+
+
+            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CretateSecurityKey(_tokenOptions.SecurityKey);
-            var signingCredentials = SigningCredentialsHelper.CreateSigninCredentials(securityKey);
+            var signingCredentials = SigningCredentialsHelper.CreateSigningCredentials(securityKey);
             var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);

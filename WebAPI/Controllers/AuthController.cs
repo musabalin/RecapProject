@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
             var userToLogin = _authService.Login(userForLoginDto);
             if (userToLogin.ResultStatus!= ResultStatus.Success)
             {
-                return BadRequest("İşlem Başarısız..");
+                return BadRequest("kullanıcı bulunamadı....");
             }
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.ResultStatus==ResultStatus.Success)
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.ResultStatus==ResultStatus.Success)
             {
-                return Ok();
+                return Ok(result.Data);
             }
             return BadRequest();
         }

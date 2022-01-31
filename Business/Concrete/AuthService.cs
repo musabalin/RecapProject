@@ -26,7 +26,7 @@ namespace Business.Concrete
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new DataResult<AccessToken>(ResultStatus.Success);
+            return new DataResult<AccessToken>(ResultStatus.Success,accessToken);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
@@ -41,7 +41,7 @@ namespace Business.Concrete
             {
                 return new DataResult<User>(ResultStatus.Error);
             }
-            return new DataResult<User>(ResultStatus.Success);
+            return new DataResult<User>(ResultStatus.Success,userToCheck);
 
         }
 
@@ -70,5 +70,6 @@ namespace Business.Concrete
             }
             return new Result(ResultStatus.Success);
         }
+
     }
 }

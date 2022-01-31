@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         public IActionResult Add(Product product)
         {
             var result = _productService.Add(product);
-            if (result.ResultStatus == 0)
+            if (result.ResultStatus == Core.Utilities.Results.ResultStatus.Success)
             {
 
                 return Ok("Eklendi...");

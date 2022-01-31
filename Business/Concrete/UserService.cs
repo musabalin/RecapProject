@@ -13,7 +13,7 @@ namespace Business.Concrete
 {
     public class UserService : IUserService
     {
-        readonly IUserDal _userDal;
+        IUserDal _userDal;
 
         public UserService(IUserDal userDal)
         {
@@ -22,25 +22,23 @@ namespace Business.Concrete
 
         public List<OperationClaim> GetClaims(User user)
         {
-            
-            return new List<OperationClaim>( _userDal.GetClaims(user));
-
+            return _userDal.GetClaims(user);
         }
 
-        public IResult Add(User user)
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new Result(ResultStatus.Success);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-            return new DataResult<List<User>>(ResultStatus.Success,_userDal.GetAll());
         }
 
         public User GetByMail(string email)
         {
             return _userDal.Get(u => u.Email == email);
         }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            return new DataResult<List<User>>(ResultStatus.Success, _userDal.GetAll());
+        }
+      
     }
 }

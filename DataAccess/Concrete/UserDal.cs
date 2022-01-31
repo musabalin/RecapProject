@@ -15,7 +15,7 @@ namespace DataAccess.Concrete
     {
         public List<OperationClaim> GetClaims(User user)
         {
-            using (var context=new NContext())
+            using (NContext context = new NContext())
             {
                 var result = from operationClaim in context.OperationClaims
                              join userOperationClaim in context.UserOperationClaims
@@ -23,7 +23,9 @@ namespace DataAccess.Concrete
                              where userOperationClaim.UserId == user.Id
                              select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
                 return result.ToList();
+
             }
         }
+    
     }
 }

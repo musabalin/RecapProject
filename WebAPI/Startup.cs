@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -49,13 +50,24 @@ namespace WebAPI
                     ValidIssuer = tokenOptions.Issuer,
                     ValidAudience = tokenOptions.Audience,
                     ValidateIssuerSigningKey = true,
+                    LifetimeValidator=LifetimeValidator,
+                    ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = SecurityKeyHelper.CretateSecurityKey(tokenOptions.SecurityKey)
                 };
             });
+            bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params)
+            {
+                if (expires != null)
+                {
+                    return expires > DateTime.UtcNow;
+                }
+                return false;
+            }
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
