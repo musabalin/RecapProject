@@ -50,7 +50,7 @@ namespace WebAPI
                     ValidIssuer = tokenOptions.Issuer,
                     ValidAudience = tokenOptions.Audience,
                     ValidateIssuerSigningKey = true,
-                    LifetimeValidator=LifetimeValidator,
+                    LifetimeValidator = LifetimeValidator,
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = SecurityKeyHelper.CretateSecurityKey(tokenOptions.SecurityKey)
                 };
@@ -83,10 +83,10 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,7 +20,7 @@ namespace Business.Concrete
         {
             _product = product;
         }
-
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
             _product.Add(product);
