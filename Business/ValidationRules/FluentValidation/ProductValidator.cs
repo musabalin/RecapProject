@@ -14,6 +14,7 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(p => p.ProductName).NotEmpty().WithMessage("Boş Geçilemez..");
             RuleFor(p => p.ProductId).NotEmpty().WithMessage("Boş Geçilemez..");
+            RuleFor(p => p.ProductName).MinimumLength(3);
 
         }
     }
