@@ -1,5 +1,7 @@
 using Business.Abstract;
 using Business.Concrete;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -54,6 +56,10 @@ namespace WebAPI
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = SecurityKeyHelper.CretateSecurityKey(tokenOptions.SecurityKey)
                 };
+            });
+            services.AddDependencyResolvers(new Core.Utilities.IoC.ICoreModule[]
+            {
+                new CoreModule()
             });
             bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params)
             {
