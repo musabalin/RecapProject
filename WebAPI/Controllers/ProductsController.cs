@@ -35,9 +35,9 @@ namespace WebAPI.Controllers
                 return BadRequest(result.Message);
         }
         [HttpGet("getlistbycategory")]
-        public IActionResult GetListByCategory(int Id)
+        public IActionResult GetListByCategory(int CategoryId)
         {
-            var result = _productService.GetByCategory(Id);
+            var result = _productService.GetByCategory(CategoryId);
             if (result.ResultStatus == 0)
             {
                 return Ok(result.Data);

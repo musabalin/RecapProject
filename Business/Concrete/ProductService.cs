@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.CacheAspect;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -39,7 +40,7 @@ namespace Business.Concrete
 
             return new DataResult<List<Product>>(ResultStatus.Success, _product.GetAll());
         }
-
+        [CacheAspect(duration:1)]
         public IDataResult<List<Product>> GetByCategory(int id)
         {
 
