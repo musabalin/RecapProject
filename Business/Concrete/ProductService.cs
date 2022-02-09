@@ -2,6 +2,7 @@
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Aspects.CacheAspect;
+using Core.Aspects.Caching;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -23,6 +24,7 @@ namespace Business.Concrete
             _product = product;
         }
         [ValidationAspect(typeof(ProductValidator),Priority =1)]
+        [CacheRemoveAspect("IProductService.Get")]//Silinmesi gereken operasyonları
         public IResult Add(Product product)
         {
             _product.Add(product);
@@ -40,7 +42,7 @@ namespace Business.Concrete
 
             return new DataResult<List<Product>>(ResultStatus.Success, _product.GetAll());
         }
-        [CacheAspect(duration:1)]
+        [CacheAspect(duration:10)]
         public IDataResult<List<Product>> GetByCategory(int id)
         {
 
